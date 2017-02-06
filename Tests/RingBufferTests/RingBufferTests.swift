@@ -124,6 +124,12 @@ class RingBufferTests: XCTestCase {
         XCTAssertEqual(make([0,1],[2,3,4]) { $0.replaceSubrange(1...2,
                                                                 with: [7,8,9]) },
                        make([0,8,9,3,4]))
+        XCTAssertEqual(make([0,1,2]) { $0.replaceSubrange(1...2,
+                                                          with: [7,8,9]) },
+                       make([0,7,8,9]))
+        XCTAssertEqual(make([0,1,2]) { $0.replaceSubrange(1...2,
+                                                          with: [6,7,8,9]) },
+                       make([0,6,7,8,9]))
     }
 
     func testReplaceSubrangeWithCount() {
@@ -157,7 +163,7 @@ class RingBufferTests: XCTestCase {
 
     func testStringDebugDescription() {
         XCTAssertEqual(make([0,1,2,3]).debugDescription,
-                       "RingBuffer<Int,5>([0, 1, 2, 3][])")
+                       "RingBuffer<Int,5>([0, 1, 2, 3])")
         XCTAssertEqual(make([0,1],[2,3,4]).debugDescription,
                        "RingBuffer<Int,5>([0, 1][2, 3, 4])")
     }
